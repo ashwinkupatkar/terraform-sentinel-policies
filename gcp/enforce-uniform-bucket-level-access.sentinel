@@ -4,8 +4,8 @@ allBuckets = filter tfplan.resource_changes as _, resource_changes {
 	resource_changes.type is "google_storage_bucket" and
 		resource_changes.mode is "managed" and
 		( resource_changes.change.after.uniform_bucket_level_access is true or
-		 resource_changes.change.after.uniform_bucket_level_access is false )
-			
+		 resource_changes.change.after.uniform_bucket_level_access is false )			
+}
 
 print("Ensure uniform bucket level access is enabled on storage buckets")
 
