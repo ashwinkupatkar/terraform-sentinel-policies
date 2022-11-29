@@ -66,7 +66,7 @@ policy "gcp-cis-4.5-compute-ensure-that-ip-forwarding-is-not-enabled-on-instance
 
 policy "gcp-cis-5.1-storage-deny-anonymous-or-public-bucket-access" {
   source = "https://raw.githubusercontent.com/hashicorp/terraform-foundational-policies-library/master/cis/gcp/storage/gcp-cis-5.1-storage-deny-anonymous-or-public-bucket-access/gcp-cis-5.1-storage-deny-anonymous-or-public-bucket-access.sentinel"
-  enforcement_level = "advisory"
+  enforcement_level = "hard-mandatory"
 }
 
 policy "gcp-cis-5.3-storage-bucket-logging-is-enabled" {
