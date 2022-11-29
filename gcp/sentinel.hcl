@@ -39,6 +39,7 @@ policy "restrict-ingress-firewall-source-ranges" {
     enforcement_level = "advisory"
 }
 
+
 ## Source: https://github.com/hashicorp/terraform-foundational-policies-library/blob/master/cis/gcp/compute/README.md
 
 ## Compute Engine
@@ -71,7 +72,7 @@ policy "gcp-cis-5.1-storage-deny-anonymous-or-public-bucket-access" {
 
 policy "gcp-cis-5.3-storage-bucket-logging-is-enabled" {
   source = "https://raw.githubusercontent.com/hashicorp/terraform-foundational-policies-library/master/cis/gcp/storage/gcp-cis-5.3-storage-bucket-logging-is-enabled/gcp-cis-5.3-storage-bucket-logging-is-enabled.sentinel"
-  enforcement_level = "advisory"
+  enforcement_level = "hard-mandatory"
 }
 
 ## Networking
