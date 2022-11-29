@@ -39,6 +39,10 @@ policy "restrict-ingress-firewall-source-ranges" {
     enforcement_level = "advisory"
 }
 
+policy "enforce-uniform-bucket-level-access" {
+    source = "./enforce-uniform-bucket-level-access.sentinel"
+    enforcement_level = "hard-mandatory"
+}
 
 ## Source: https://github.com/hashicorp/terraform-foundational-policies-library/blob/master/cis/gcp/compute/README.md
 
