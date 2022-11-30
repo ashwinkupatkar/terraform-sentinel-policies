@@ -23,13 +23,13 @@ deny_undefined_compute_instance_metadata = rule {
 	}
 }
 
-deny_undefined_guest_attributes = rule when deny_undefined_compute_instance_metadata is true {
+deny_undefined_compute_instance_guest_attributes = rule when deny_undefined_compute_instance_metadata is true {
 	all allComputeInstances as _, instances {
 		keys(instances.change.after.metadata) contains "guest-attributes"
 	}
 }
 
-guest_attributes_is_disabled_in_compute_instance_metadata = rule when deny_undefined_guest_attributes is true {
+guest_attributes_is_disabled_in_compute_instance_metadata = rule when deny_undefined_compute_instance_guest_attributes is true {
 	all allComputeInstances as _, instances {
 		strings.to_lower(instances.change.after.metadata["guest-attributes"]) is not ""
 	}
