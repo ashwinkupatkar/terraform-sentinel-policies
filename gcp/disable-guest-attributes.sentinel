@@ -55,7 +55,7 @@ block_project_ssh_keys_is_enabled_in_compute_instance_template_metadata = rule w
 
 main = rule {
 	deny_undefined_compute_instance_metadata and
-	deny_undefined_compute_instance_block_guest_attributes and
+	deny_undefined_compute_instance_guest_attributes and
 	deny_undefined_compute_instance_template_metadata and
 	deny_undefined_compute_instance_template_guest_attributes and
 	guest_attributes_is_enabled_in_compute_instance_metadata and
