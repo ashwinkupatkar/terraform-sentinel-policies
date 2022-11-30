@@ -47,7 +47,7 @@ deny_undefined_compute_instance_template_guest_attributes = rule when deny_undef
 	}
 }
 
-block_project_ssh_keys_is_enabled_in_compute_instance_template_metadata = rule when deny_undefined_compute_instance_template_guest_attributes is true {
+guest_attributes_is_disabled_in_compute_instance_template_metadata = rule when deny_undefined_compute_instance_template_guest_attributes is true {
 	all allComputeInstanceTemplates as _, templates {
 		strings.to_lower(templates.change.after.metadata["guest-attributes"]) is ""
 	}
@@ -58,6 +58,6 @@ main = rule {
 	deny_undefined_compute_instance_guest_attributes and
 	deny_undefined_compute_instance_template_metadata and
 	deny_undefined_compute_instance_template_guest_attributes and
-	guest_attributes_is_enabled_in_compute_instance_metadata and
-	guest_attributes_is_enabled_in_compute_instance_template_metadata
+	guest_attributes_is_disabled_in_compute_instance_metadata and
+	guest_attributes_is_disabled_in_compute_instance_template_metadata
 }
