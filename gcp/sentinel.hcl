@@ -14,37 +14,8 @@ module "gcp-functions" {
     source = "./gcp-functions/gcp-functions.sentinel"
 }
 
-policy "enforce-mandatory-labels" {
-    source = "./enforce-mandatory-labels.sentinel"
-    enforcement_level = "advisory"
-}
 
-policy "restrict-egress-firewall-destination-ranges" {
-    source = "./restrict-egress-firewall-destination-ranges.sentinel"
-    enforcement_level = "advisory"
-}
-
-policy "restrict-gce-machine-type" {
-    source = "./restrict-gce-machine-type.sentinel"
-    enforcement_level = "advisory"
-}
-
-policy "restrict-gke-clusters" {
-    source = "./restrict-gke-clusters.sentinel"
-    enforcement_level = "advisory"
-}
-
-policy "restrict-ingress-firewall-source-ranges" {
-    source = "./restrict-ingress-firewall-source-ranges.sentinel"
-    enforcement_level = "advisory"
-}
-
-policy "enforce-uniform-bucket-level-access" {
-    source = "./enforce-uniform-bucket-level-access.sentinel"
-    enforcement_level = "hard-mandatory"
-}
-
-## Source: https://github.com/hashicorp/terraform-foundational-policies-library/blob/master/cis/gcp/compute/README.md
+## Source of remote policies: https://github.com/hashicorp/terraform-foundational-policies-library/blob/master/cis/gcp/compute/README.md
 
 ## Compute Engine
 policy "gcp-cis-4.2-compute-block-project-wide-ssh-keys-enabled-for-vm-instances" {
@@ -54,19 +25,44 @@ policy "gcp-cis-4.2-compute-block-project-wide-ssh-keys-enabled-for-vm-instances
 
 policy "gcp-cis-4.3-compute-ensure-oslogin-is-enabled-for-a-project" {
     source = "https://raw.githubusercontent.com/hashicorp/terraform-foundational-policies-library/master/cis/gcp/compute/gcp-cis-4.3-compute-ensure-oslogin-is-enabled-for-a-project/gcp-cis-4.3-compute-ensure-oslogin-is-enabled-for-a-project.sentinel"
-    enforcement_level = "advisory"
+    enforcement_level = "hard-mandatory"
 }
 
 policy "gcp-cis-4.4-compute-enable-connecting-to-serial-ports-is-not-enabled-for-vm-instance" {
     source = "https://raw.githubusercontent.com/hashicorp/terraform-foundational-policies-library/master/cis/gcp/compute/gcp-cis-4.4-compute-enable-connecting-to-serial-ports-is-not-enabled-for-vm-instance/gcp-cis-4.4-compute-enable-connecting-to-serial-ports-is-not-enabled-for-vm-instance.sentinel"
-    enforcement_level = "advisory"
+    enforcement_level = "hard-mandatory"
 }
 
 policy "gcp-cis-4.5-compute-ensure-that-ip-forwarding-is-not-enabled-on-instances" {
     source = "https://raw.githubusercontent.com/hashicorp/terraform-foundational-policies-library/master/cis/gcp/compute/gcp-cis-4.5-compute-ensure-that-ip-forwarding-is-not-enabled-on-instances/gcp-cis-4.5-compute-ensure-that-ip-forwarding-is-not-enabled-on-instances.sentinel"
-    enforcement_level = "advisory"
+    enforcement_level = "hard-mandatory"
 }
 
+policy "restrict-gce-machine-type" {
+    source = "./restrict-gce-machine-type.sentinel"
+    enforcement_level = "hard-mandatory"
+}
+
+policy "enforce-compute-engine-description" {
+    source = "./enforce-compute-engine-description.sentinel"
+    enforcement_level = "hard-mandatory"
+}
+
+policy "enforce-mandatory-labels" {
+    source = "./enforce-mandatory-labels.sentinel"
+    enforcement_level = "hard-mandatory"
+}
+
+/*
+policy "enforce-compute-engine-hostname" {
+    source = "./enforce-compute-engine-hostname.sentinel"
+    enforcement_level = "hard-mandatory"
+}
+*/
+policy "restrict-gke-clusters" {
+    source = "./restrict-gke-clusters.sentinel"
+    enforcement_level = "advisory"
+}
 ## Storage
 
 policy "gcp-cis-5.1-storage-deny-anonymous-or-public-bucket-access" {
@@ -76,7 +72,12 @@ policy "gcp-cis-5.1-storage-deny-anonymous-or-public-bucket-access" {
 
 policy "gcp-cis-5.3-storage-bucket-logging-is-enabled" {
   source = "https://raw.githubusercontent.com/hashicorp/terraform-foundational-policies-library/master/cis/gcp/storage/gcp-cis-5.3-storage-bucket-logging-is-enabled/gcp-cis-5.3-storage-bucket-logging-is-enabled.sentinel"
-  enforcement_level = "hard-mandatory"
+  enforcement_level = "advisory"
+}
+
+policy "enforce-uniform-bucket-level-access" {
+    source = "./enforce-uniform-bucket-level-access.sentinel"
+    enforcement_level = "hard-mandatory"
 }
 
 ## Networking
@@ -120,6 +121,16 @@ policy "gcp-cis-3.8-networking-private-google-access-is-enabled-for-all-vpc-subn
   enforcement_level = "advisory"
 }
 
+policy "restrict-ingress-firewall-source-ranges" {
+    source = "./restrict-ingress-firewall-source-ranges.sentinel"
+    enforcement_level = "advisory"
+}
+
+policy "restrict-egress-firewall-destination-ranges" {
+    source = "./restrict-egress-firewall-destination-ranges.sentinel"
+    enforcement_level = "advisory"
+}
+
 ## Databases
 
 policy "gcp-cis-6.1-databases-cloud-sql-databases-instance-requires-all-incoming-connections-to-use-ssl" {
@@ -129,6 +140,6 @@ policy "gcp-cis-6.1-databases-cloud-sql-databases-instance-requires-all-incoming
 
 policy "gcp-cis-6.2-databases-cloud-sql-databases-instances-are-not-open-to-the-world" {
     source = "https://raw.githubusercontent.com/hashicorp/terraform-foundational-policies-library/master/cis/gcp/databases/gcp-cis-6.2-databases-cloud-sql-databases-instances-are-not-open-to-the-world/gcp-cis-6.2-databases-cloud-sql-databases-instances-are-not-open-to-the-world.sentinel"
-    enforcement_level = "advisory"
+    enforcement_level = "hard-mandatory"
 }
 */

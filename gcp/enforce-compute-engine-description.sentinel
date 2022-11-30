@@ -1,0 +1,20 @@
+import "tfplan/v2" as tfplan
+
+allComputeEngines = filter tfplan.resource_changes as _, resource_changes {
+	resource_changes.type is "google_compute_instance" and
+		resource_changes.mode is "managed" and 
+        resource_changes.provider_name	is "registry.terraform.io/hashicorp/google"	
+}
+
+print("Ensure appropriate compute engine description is provided")
+
+
+ensure_compute_engine_description_is_provided = rule {
+	all allComputeEngines as _, vm {
+		vm.change.after.description is not null
+	}
+}
+
+main = rule {
+        ensure_compute_engine_description_is_provided    
+}
