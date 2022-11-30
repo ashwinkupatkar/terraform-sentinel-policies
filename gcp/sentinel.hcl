@@ -53,9 +53,13 @@ policy "enforce-mandatory-labels" {
     enforcement_level = "hard-mandatory"
 }
 
-
 policy "enforce-compute-engine-hostname" {
     source = "./enforce-compute-engine-hostname.sentinel"
+    enforcement_level = "hard-mandatory"
+}
+
+policy "disable-guest-attributes" {
+    source = "./disable-guest-attributes.sentinel"
     enforcement_level = "hard-mandatory"
 }
 

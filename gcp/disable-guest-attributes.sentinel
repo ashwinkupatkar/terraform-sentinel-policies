@@ -1,0 +1,63 @@
+import "tfplan/v2" as tfplan
+import "strings"
+
+allComputeInstances = filter tfplan.resource_changes as _, resource_changes {
+	resource_changes.type is "google_compute_instance" and
+		resource_changes.mode is "managed" and
+		(resource_changes.change.actions contains "create" or
+			resource_changes.change.actions is ["update"])
+}
+
+allComputeInstanceTemplates = filter tfplan.resource_changes as _, resource_changes {
+	resource_changes.type is "google_compute_instance_template" and
+		resource_changes.mode is "managed" and
+		(resource_changes.change.actions contains "create" or
+			resource_changes.change.actions is ["update"])
+}
+
+print("Ensure 'enable-guest-attributes' are disabled for VM instances")
+
+deny_undefined_compute_instance_metadata = rule {
+	all allComputeInstances as _, instances {
+		instances.change.after.metadata is not null
+	}
+}
+
+deny_undefined_guest_attributes = rule when deny_undefined_compute_instance_metadata is true {
+	all allComputeInstances as _, instances {
+		keys(instances.change.after.metadata) contains "guest-attributes"
+	}
+}
+
+guest_attributes_is_disabled_in_compute_instance_metadata = rule when deny_undefined_guest_attributes is true {
+	all allComputeInstances as _, instances {
+		strings.to_lower(instances.change.after.metadata["guest-attributes"]) is not ""
+	}
+}
+
+deny_undefined_compute_instance_template_metadata = rule {
+	all allComputeInstanceTemplates as _, templates {
+		keys(templates.change.after) contains "metadata"
+	}
+}
+
+deny_undefined_compute_instance_template_guest_attributes = rule when deny_undefined_compute_instance_template_metadata is true {
+	all allComputeInstanceTemplates as _, templates {
+		keys(templates.change.after.metadata) contains "guest-attributes"
+	}
+}
+
+block_project_ssh_keys_is_enabled_in_compute_instance_template_metadata = rule when deny_undefined_compute_instance_template_guest_attributes is true {
+	all allComputeInstanceTemplates as _, templates {
+		strings.to_lower(templates.change.after.metadata["guest-attributes"]) is not ""
+	}
+}
+
+main = rule {
+	deny_undefined_compute_instance_metadata and
+	deny_undefined_compute_instance_block_guest_attributes and
+	deny_undefined_compute_instance_template_metadata and
+	deny_undefined_compute_instance_template_guest_attributes and
+	guest_attributes_is_enabled_in_compute_instance_metadata and
+	guest_attributes_is_enabled_in_compute_instance_template_metadata
+}
