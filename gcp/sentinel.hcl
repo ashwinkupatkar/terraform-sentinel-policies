@@ -53,12 +53,12 @@ policy "enforce-mandatory-labels" {
     enforcement_level = "hard-mandatory"
 }
 
-/*
+
 policy "enforce-compute-engine-hostname" {
     source = "./enforce-compute-engine-hostname.sentinel"
     enforcement_level = "hard-mandatory"
 }
-*/
+
 policy "restrict-gke-clusters" {
     source = "./restrict-gke-clusters.sentinel"
     enforcement_level = "advisory"
