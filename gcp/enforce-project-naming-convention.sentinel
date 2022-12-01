@@ -5,8 +5,8 @@ print("Ensure allowed project naming convention")
 
 allowed-project-naming-convention = rule {
     filter tfconfig.resource_changes as _, rc {
-        rc.mode = "managed" and rc.type = "google_project" and 
-        rc.provider_name matches "(.*)google$" and rc.change.actions = ["create"] and
+        rc.mode is "managed" and rc.type is "google_project" and 
+        rc.provider_name matches "(.*)google$" and rc.change.actions is ["create"] and
         s.has_prefix((rc.change.after.name), "prj-") 
 }
 
