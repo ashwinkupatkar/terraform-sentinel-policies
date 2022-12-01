@@ -7,11 +7,18 @@ print("Ensure allowed project naming convention")
 
 //print(s.has_prefix("project", "prj-"))
 
-allowed_project_naming_convention = filter tfconfig.resources as _, r {
-        r.mode is "managed" and r.type is "google_project" and 
-        s.has_prefix((r.config.name.constant_value), "prj-")
+getProjectName = filter tfconfig.resources as _, r {
+    r.mode is "managed" and r.type is "google_project" and 
+    s.has_prefix((r.config.name.constant_value), "prj-")
+}
+
+allowed_project_naming_convention = rule {
+    all getProjectName as _, project {
+        project.config.name contains "prj-"
+    }
+
 }
 
 main = rule {
-    allowed_project_naming_convention is not "[]"
+    allowed_project_naming_convention
 }
