@@ -8,6 +8,7 @@ allowed-project-naming-convention = rule {
         rc.mode is "managed" and rc.type is "google_project" and 
         rc.provider_name matches "(.*)google$" and rc.change.actions is ["create"] and
         s.has_prefix((rc.change.after.name), "prj-") 
+        }
 }
 
 main = rule {
