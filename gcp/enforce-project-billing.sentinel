@@ -12,7 +12,8 @@ print("Ensure project billing is enabled")
 
 ensure_project_billing_is_enabled = rule {
 	all allProjects as _, project {
-		project.change.after.billing_account is not null
+		project.change.after.billing_account is not null and 
+		project.change.after.billing_account is not "" 
 	}
 }
 
