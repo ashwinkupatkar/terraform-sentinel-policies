@@ -9,8 +9,8 @@ getProjectName = filter tfconfig.resources as _, r {
 
 allowed_project_naming_convention = rule {
     all getProjectName as _, project {
-        getName = project.config.name
-        s.has_prefix(string(getName), "prj-")
+        //getName = project.config.name
+        s.has_prefix("project-ashwin", "prj-")
     }
 }
 
