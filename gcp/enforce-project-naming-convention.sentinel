@@ -13,5 +13,5 @@ allowed_project_naming_convention = filter tfconfig.resources as _, r {
 }
 
 main = rule {
-    allowed_project_naming_convention
+    allowed_project_naming_convention is not "[]"
 }
