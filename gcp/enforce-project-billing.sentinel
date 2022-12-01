@@ -1,0 +1,21 @@
+import "tfplan/v2" as tfplan
+
+allProjects = filter tfplan.resource_changes as _, resource_changes {
+	resource_changes.type is "google_project" and
+		resource_changes.mode is "managed" and 
+        resource_changes.provider_name	is "registry.terraform.io/hashicorp/google"	and
+        (resource_changes.change.actions contains "create" or resource_changes.change.actions contains "no-op" or
+        resource_changes.change.actions contains "update")
+}
+
+print("Ensure project billing is enabled")
+
+ensure_project_billing_is_enabled = rule {
+	all allProjects as _, project {
+		project.change.after.billing_account is not null
+	}
+}
+
+main = rule {
+        ensure_project_billing_is_enabled    
+}
