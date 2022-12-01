@@ -3,10 +3,13 @@ import "strings" as s
 
 print("Ensure allowed project naming convention")
 
+print("output:")
+
+print(s.has_prefix((tfconfig.resources.change.after.name), "prj-"))
+
 allowed_project_naming_convention = filter tfconfig.resources as _, r {
         r.mode is "managed" and r.type is "google_project" and 
-        r.provider_name matches "(.*)google$" and r.change.actions is ["create"] and
-        s.has_prefix((r.change.after.name), "prj-") 
+        r.provider_name matches "(.*)google$" and r.change.actions is ["create"]
 }
 
 main = rule {
