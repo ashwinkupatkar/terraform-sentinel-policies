@@ -1,4 +1,4 @@
-import "tfplan/v2" as tfconfig
+import "tfplan/v2" as tfplan
 import "strings" as s 
 
 print("Ensure allowed project naming convention")
