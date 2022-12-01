@@ -21,6 +21,12 @@ policy "enforce-project-billing" {
     enforcement_level = "hard-mandatory"
 }
 
+policy "enforce-project-naming-convention" {
+    source = "./enforce-project-naming-convention.sentinel"
+    enforcement_level = "hard-mandatory"
+}
+
+
 ## Source of remote policies: https://github.com/hashicorp/terraform-foundational-policies-library/blob/master/cis/gcp/compute/README.md
 
 ## Compute Engine
@@ -64,7 +70,7 @@ policy "enforce-compute-engine-hostname" {
     enforcement_level = "hard-mandatory"
 }
 
-policy "disable-guest-attributes" {
+policy "enforce-disable-guest-attributes" {
     source = "./disable-guest-attributes.sentinel"
     enforcement_level = "hard-mandatory"
 }
