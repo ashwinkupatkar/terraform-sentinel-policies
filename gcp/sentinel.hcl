@@ -71,7 +71,7 @@ policy "enforce-compute-engine-hostname" {
 }
 
 policy "enforce-disable-guest-attributes" {
-    source = "./disable-guest-attributes.sentinel"
+    source = "./enforce-disable-guest-attributes.sentinel"
     enforcement_level = "hard-mandatory"
 }
 
