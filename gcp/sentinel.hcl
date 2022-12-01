@@ -15,6 +15,12 @@ module "gcp-functions" {
 }
 
 
+## Projects
+policy "enforce-project-billing" {
+    source = "./enforce-project-billing.sentinel"
+    enforcement_level = "hard-mandatory"
+}
+
 ## Source of remote policies: https://github.com/hashicorp/terraform-foundational-policies-library/blob/master/cis/gcp/compute/README.md
 
 ## Compute Engine
