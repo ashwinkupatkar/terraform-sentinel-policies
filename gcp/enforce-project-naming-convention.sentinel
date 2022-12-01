@@ -14,7 +14,7 @@ getProjectName = filter tfconfig.resources as _, r {
 
 allowed_project_naming_convention = rule {
     all getProjectName as _, project {
-        project.config.name matches "prj-"
+        project.config.name is "prj-"
     }
 
 }
