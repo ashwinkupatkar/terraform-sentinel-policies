@@ -4,12 +4,12 @@ import "strings" as s
 print("Ensure allowed folder naming convention. Folder name should start with prefix: 'fldr-'")
 
 getFolderName = filter tfconfig.resources as _, r {
-    r.mode is "managed" and r.type is "google_project" 
+    r.mode is "managed" and r.type is "google_folder" 
 }
 
 allowed_folder_naming_convention = rule {
     all getFolderName as _, folder {
-        s.has_prefix(string(folder.config.name.constant_value), "fldr-")
+        s.has_prefix(string(folder.config.display_name.constant_value), "fldr-")
     }
 }
 
