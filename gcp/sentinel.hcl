@@ -14,6 +14,11 @@ module "gcp-functions" {
     source = "./gcp-functions/gcp-functions.sentinel"
 }
 
+## folder
+policy "enforce-folder-folder-naming-convention" {
+    source = "./enforce-folder-naming-convention.sentinel"
+    enforcement_level = "hard-mandatory"
+}
 
 ## Projects
 policy "enforce-project-billing" {
