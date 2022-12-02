@@ -1,7 +1,7 @@
 import "tfconfig/v2" as tfconfig
 import "strings" as s
 
-print("Ensure allowed project naming convention. Project name should start with prefix -> "prj-" ")
+print("Ensure allowed project naming convention. Project name should start with prefix -> 'prj-' ")
 
 getProjectName = filter tfconfig.resources as _, r {
     r.mode is "managed" and r.type is "google_project" 
