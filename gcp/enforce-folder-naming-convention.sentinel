@@ -1,7 +1,7 @@
 import "tfconfig/v2" as tfconfig
 import "strings" as s
 
-print("Ensure allowed folder naming convention. Folder name should start with prefix: "fldr-" ")
+print("Ensure allowed folder naming convention. Folder name should start with prefix: 'fldr-'")
 
 getFolderName = filter tfconfig.resources as _, r {
     r.mode is "managed" and r.type is "google_project" 
